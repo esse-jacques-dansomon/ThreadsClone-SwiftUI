@@ -1,5 +1,5 @@
 //
-//  ThreadsextBtnView.swift
+//  ThreadsTextBtnView.swift
 //  ThreadsClone
 //
 //  Created by Esse Jacques  on 30/05/2024.
@@ -7,21 +7,25 @@
 
 import SwiftUI
 
-struct ThreadsextBtnView: View {
+struct ThreadsTextBtnView: View {
     
     var title : String;
+    var textColor: Color = .white
+    var background: Color = .black
+    
     
     var body: some View {
         Text(title)
             .font(.headline)
+            .bold()
             .frame(maxWidth: .infinity)
-            .foregroundStyle(.white)
-            .padding()
-            .background(.black)
+            .foregroundStyle(textColor)
+            .padding(10)
+            .background(background)
             .cornerRadius(5)
     }
 }
 
 #Preview {
-    ThreadsextBtnView(title: "title")
+    ThreadsTextBtnView(title: "title")
 }

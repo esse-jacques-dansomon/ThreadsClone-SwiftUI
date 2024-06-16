@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State var email: String = ""
-    @State var username: String = ""
-    @State var fullname: String = ""
-    @State var password: String = ""
-    
+    @StateObject var viewModel = SignUpViewModel()
+
     @Environment(\.dismiss)  var dismiss ;
     
     var body: some View {
@@ -23,34 +20,37 @@ struct SignUpView: View {
                     AppLogoView()
 
                     ThreadsFormFieldView(
-                        text: $email,
+                        text: $viewModel.email,
                         title: "Enter your email"
                     ).autocapitalization(.none)
 
                     ThreadsFormFieldView(
-                        text: $fullname,
+                        text: $viewModel.fullname,
                         title: "Enter your full name"
                     )
 
                     ThreadsFormFieldView(
-                        text: $username,
-                        title: "Enter your usernam"
+                        text: $viewModel.username,
+                        title: "Enter your username"
                     )
 
                     ThreadsFormFieldView(
-                        text: $password,
+                        text: $viewModel.password,
                         title: "Enter your password",
                         isSecureField: true
                     )
 
                     Button {
-                       
+                        Task {
+                             await viewModel.createUser()
+                        }
                     } label: {
-                        ThreadsextBtnView(title: "Sign Up")
+                        ThreadsTextBtnView(title: "Sign Up")
                             .padding(.vertical)
                     }
 
                 }.padding()
+
                 Spacer()
 
                 Divider()
@@ -68,6 +68,9 @@ struct SignUpView: View {
                     }.padding()
                 }
             }
+        }.alert(item: $viewModel.error  ) 
+        { error in
+            Alert(title: Text("Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
         }
     }
 }

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State var email: String = ""
-    @State var password: String = ""
+
+    @StateObject var viewModel  = SignInViewModel()
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -18,12 +19,12 @@ struct SignInView: View {
                     AppLogoView()
                         
                     ThreadsFormFieldView(
-                        text: $email,
+                        text: $viewModel.email,
                         title: "Enter your email"
                     )
                         
                     ThreadsFormFieldView(
-                        text: $password,
+                        text: $viewModel.password,
                         title: "Enter your password",
                         isSecureField: true
                     )
@@ -37,8 +38,12 @@ struct SignInView: View {
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                             
-                    Button {} label: {
-                        ThreadsextBtnView(title: "Login")
+                    Button {
+                        Task {
+                             await viewModel.login();
+                        }
+                    } label: {
+                        ThreadsTextBtnView(title: "Login")
                             .padding(.vertical)
                     }
                 
@@ -58,9 +63,13 @@ struct SignInView: View {
 
                         Text("Sign Up")
                             .foregroundStyle(.black)
-                            .underline()
+                            .bold()
+                        
                     }.padding()
                 }
+            }.alert(item: $viewModel.error  )
+            { error in
+                Alert(title: Text("Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
             }
         }
     }
