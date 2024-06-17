@@ -17,14 +17,15 @@ class ContentViewModel: ObservableObject {
 
 
     init() {
-        self.setUpSubscribers();
+       self.setUpSubscribers();
     }
 
-    func setUpSubscribers() {
+    func setUpSubscribers(){
         AuthService.shared.$userSession.sink{ [weak self] userSession in
             self?.userSession = userSession
         }
         .store(in: &cancellables) // Store the subscription
+
     }
 
 }

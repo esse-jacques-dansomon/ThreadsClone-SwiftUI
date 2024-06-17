@@ -134,15 +134,19 @@ struct ProfileSettingsView: View {
                             Spacer()
                         }.padding()
                     }
-                    HStack {
-                        Text("Log out")
-                            .foregroundStyle(.red)
-                            .bold()
-                            .onSubmit {
-                                AuthService.shared.singOut();
-                            }
-                        Spacer()
-                    }.padding()
+
+                    Button {
+                        AuthService.shared.singOut();
+                    } label: {
+                        HStack {
+                            Text("Log out")
+                                .foregroundStyle(.red)
+                                .bold()
+                            
+                            Spacer()
+                        }.padding()
+                    }
+
 
                 }
                 Spacer()

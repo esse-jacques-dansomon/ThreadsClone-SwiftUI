@@ -11,13 +11,13 @@ import Foundation
 enum ProfileThreadsFilter : Int, CaseIterable, Identifiable {
     case Threads
     case Replies
-//    case Messages
-    
+    case Reposts
+
     var title: String {
         switch  self {
         case .Threads: return "Threads"
         case .Replies: return "Replies"
-//        case .Messages: return "Messages"
+        case .Reposts: return "Reposts"
         }
     }
     

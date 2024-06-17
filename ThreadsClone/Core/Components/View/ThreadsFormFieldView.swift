@@ -18,6 +18,7 @@ struct ThreadsFormFieldView: View {
               
         }else {
             TextField(title, text: $text)
+                .autocapitalization(.none )
                 .modifier(ThreadsTextFieldModifier())
             
         }

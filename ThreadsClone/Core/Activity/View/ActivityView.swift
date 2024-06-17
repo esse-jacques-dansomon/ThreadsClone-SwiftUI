@@ -36,10 +36,10 @@ struct ActivityView: View {
 
 
                 ScrollView{
-                    ThreadsUserItemIView()
+                    //ThreadsUserItemIView()
                     LazyVStack( alignment: .leading){
                         ForEach(1...10, id: \.self){ item in
-                            ThreadItemView()
+                           // ThreadItemView()
                         }
                     }.padding()
                 }

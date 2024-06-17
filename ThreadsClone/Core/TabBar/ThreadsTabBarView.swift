@@ -28,13 +28,14 @@ struct ThreadsTabBarView: View {
             
             Text("").tabItem {
                 Image(systemName: "plus")
+
             }
             .onAppear{ selectedTab = 2  }
             .tag(2)
             .sheet(isPresented: .constant(selectedTab == 2), onDismiss: {
                 selectedTab = oldSelectedTav
             }, content: {
-                FeedsCreationView()
+                FeedsCreationView(selectedTab: $selectedTab, oldSelectedTav: $oldSelectedTav)
             })
 
             ActivityView().tabItem {
@@ -45,7 +46,7 @@ struct ThreadsTabBarView: View {
             .tag(3)
             
             
-            ProfileView().tabItem {
+            CurrentUserProfile().tabItem {
                 Image(systemName: selectedTab == 4 ? "person.fill" : "person")
 
                     .environment(\.symbolVariants, selectedTab == 4 ? .fill: .none)
@@ -55,9 +56,13 @@ struct ThreadsTabBarView: View {
             .tag(4)
             
         }
-
         .background(.gray)
         .tint(.black)
+        .onAppear{
+            Task {
+                try await  UserService.shared.fectCurrentUser()
+            }
+        }
     }
 }
 

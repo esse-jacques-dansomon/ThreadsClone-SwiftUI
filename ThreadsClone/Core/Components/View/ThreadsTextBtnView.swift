@@ -19,10 +19,17 @@ struct ThreadsTextBtnView: View {
             .font(.headline)
             .bold()
             .frame(maxWidth: .infinity)
+
+            .padding(6)
+
+
             .foregroundStyle(textColor)
-            .padding(10)
             .background(background)
-            .cornerRadius(5)
+            .overlay(
+                   RoundedRectangle(cornerRadius: 10)
+                       .stroke(Color.black, lineWidth: 1)
+               )
+
     }
 }
 

@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct ThreadItemView: View {
+
+    let thread: Thread
+
     var body: some View {
         VStack {
             HStack (alignment: .top){
                 
                 HStack (alignment: .top){
                    
-                    ThreadsCircleImage()
-                        
+                    ThreadsCircleImage(user: thread.user)
+
                     VStack (alignment:.leading, spacing: 5) {
-                        Text("Charles_leclec")
-                        Text("Home race in Monaco was amazinf")
+                        Text(thread.user?.username ?? "")
+                        Text(thread.caption)
                             .font(.footnote)
                          
-                     
                         HStack {
                             Button {
                                 
@@ -77,6 +79,11 @@ struct ThreadItemView: View {
     }
 }
 
-#Preview {
-    ThreadItemView()
+
+struct ThreadItemView_preview: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ThreadItemView(thread: dev.thread)
+        }
+    }
 }

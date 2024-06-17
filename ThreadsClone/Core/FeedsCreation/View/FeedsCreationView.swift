@@ -8,19 +8,34 @@
 import SwiftUI
 
 struct FeedsCreationView: View {
-    @State var thread : String = ""
+    @Binding var selectedTab : Int
+    @Binding var oldSelectedTav : Int
+
+    @StateObject var viewModel = FeedsCreationViewModel()
+
+    private var user: User? {
+        return UserService.shared.currentUser
+    }
+
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
                 HStack (alignment: .top) {
-                    ThreadsCircleImage()
+                    ThreadsCircleImage(user: user)
                     VStack {
                         HStack {
-                            Text("esse_jacques")
+                            Text(user?.fullname ?? "")
                             Spacer()
-                            Image(systemName: "xmark")
+                            if !viewModel.caption.isEmpty {
+                                Button {
+                                    viewModel.caption = ""
+                                } label: {
+                                    Image(systemName: "xmark")
+                                }
+                            }
+
                         }
-                        TextField("Threads", text: $thread)
+                        TextField("Start a thread", text: $viewModel.caption, axis: .vertical)
                         Spacer()
                     }
 
@@ -32,14 +47,24 @@ struct FeedsCreationView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button {} label: {
-                            Text("Cancel")
-                                .foregroundStyle(.black)
-                        }
+                        Button(action: {
+                                    selectedTab = oldSelectedTav
+                                    print("Hello")
+                                }) {
+                                    Text("Cancel")
+                                        .foregroundColor(.black)
+                                }
                     }
 
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button {} label: {
+                        Button {
+                            Task {
+                                try await viewModel.uploadThread()
+
+                                selectedTab = oldSelectedTav
+                            }
+
+                        } label: {
                             Text("Post")
                                 .bold()
                                 .foregroundStyle(.black)
@@ -52,5 +77,7 @@ struct FeedsCreationView: View {
 }
 
 #Preview {
-    FeedsCreationView()
+    FeedsCreationView(
+        selectedTab: .constant(2), oldSelectedTav: .constant(3)
+    )
 }

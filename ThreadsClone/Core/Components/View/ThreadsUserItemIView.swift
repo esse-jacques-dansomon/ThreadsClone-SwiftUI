@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ThreadsUserItemIView: View {
+    let user: User
+
     var body: some View {
         HStack (alignment: .center) {
-            ThreadsCircleImage()
-            
-            VStack {
-                Text("essejacques")
-                Text("Esse jacques")
+            ThreadsCircleImage(user: user)
+
+            VStack (alignment: .leading) {
+                HStack {
+                    Text(user.username.trimmingCharacters(in: .whitespacesAndNewlines))
+                    Spacer()
+                }
+                Text(user.fullname.trimmingCharacters(in: .whitespacesAndNewlines))
             }
             
             Spacer()
@@ -39,6 +44,8 @@ struct ThreadsUserItemIView: View {
     }
 }
 
-#Preview {
-    ThreadsUserItemIView()
+struct UserCell_Preview: PreviewProvider {
+    static var previews: some View {
+        ThreadsUserItemIView(user: dev.user)
+    }
 }
