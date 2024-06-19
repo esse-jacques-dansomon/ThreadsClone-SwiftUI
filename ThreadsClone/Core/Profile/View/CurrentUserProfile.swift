@@ -68,7 +68,7 @@ struct CurrentUserProfile: View {
 
                     // Custom TabView
                     if let user = currentUser {
-                        UserContentListView(user: user)
+                        UserContentListView(user: user, isCuurentUser: true)
                     }
 
 

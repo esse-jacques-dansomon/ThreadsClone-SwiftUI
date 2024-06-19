@@ -10,29 +10,38 @@ import SwiftUI
 struct ThreadsUserItemIView: View {
     let user: User
 
-    var body: some View {
-        HStack (alignment: .center) {
-            ThreadsCircleImage(user: user)
+    @EnvironmentObject var viewModel: ExploreViewModel
+    @State var openUnfollowSheet = false
 
-            VStack (alignment: .leading) {
+    var body: some View {
+        HStack(alignment: .center) {
+            ThreadsCircleImage(user: user, size: .medium)
+
+            VStack(alignment: .leading) {
                 HStack {
                     Text(user.username.trimmingCharacters(in: .whitespacesAndNewlines))
                     Spacer()
                 }
                 Text(user.fullname.trimmingCharacters(in: .whitespacesAndNewlines))
             }
-            
+
             Spacer()
-            
+
             Button {
-                
-            }label: {
-                Text("Follow")
+                Task {
+                    if viewModel.isFollowingUser(followedID: user.id) {
+                        openUnfollowSheet.toggle()
+                    } else {
+                        try await viewModel.followerUser(followedUserID: user.id)
+                    }
+                }
+            } label: {
+                Text(viewModel.isFollowingUser(followedID: user.id) ? "Following" : "Follow")
                     .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .frame(width: 100, height: 32)
-        
+                    .fontWeight(.medium)
+                    .foregroundColor(viewModel.isFollowingUser(followedID: user.id) ? .gray : .black)
+                    .frame(width: 105, height: 32)
+                    .cornerRadius(10)
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color(.systemGray4), lineWidth: 1)
@@ -41,11 +50,15 @@ struct ThreadsUserItemIView: View {
         }
         .padding(.vertical, 4)
         .padding(.horizontal)
+        .sheet(isPresented: $openUnfollowSheet, content: {
+            UnfollowSheetView(user: user, openUnfollowSheet: $openUnfollowSheet)
+        })
     }
 }
 
 struct UserCell_Preview: PreviewProvider {
     static var previews: some View {
         ThreadsUserItemIView(user: dev.user)
+            .environmentObject(ExploreViewModel())
     }
 }

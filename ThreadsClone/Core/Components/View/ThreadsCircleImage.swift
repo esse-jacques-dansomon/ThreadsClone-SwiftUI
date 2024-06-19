@@ -30,10 +30,11 @@ enum ProfileImageSize {
 
 struct ThreadsCircleImage: View {
     var user: User?
-    let size: ProfileImageSize = .medium
+    var size: ProfileImageSize
 
-    init(user: User?) {
+    init(user: User?, size: ProfileImageSize = .xSmall) {
         self.user = user
+        self.size = size
     }
     var body: some View {
         if let imageUrl =  user?.profileImageUrl {
@@ -48,7 +49,7 @@ struct ThreadsCircleImage: View {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .scaledToFill()
-                .frame(width: 50, height: 50)
+                .frame(width: size.dismesion, height: size.dismesion)
                 .foregroundColor(Color(.systemGray4))
                 .clipShape(Circle())
         }
@@ -60,6 +61,6 @@ struct ThreadsCircleImage: View {
 
 struct ThreadsCircleImage_preview: PreviewProvider {
     static var previews: some View {
-        ThreadsCircleImage(user: dev.user)
+        ThreadsCircleImage(user: dev.user )
     }
 }

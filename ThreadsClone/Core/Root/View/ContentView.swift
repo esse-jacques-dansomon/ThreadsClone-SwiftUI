@@ -10,13 +10,19 @@ import SwiftUI
 struct ContentView: View {
 
     @StateObject var viewModel  = ContentViewModel()
+
     var body: some View {
         ZStack {
             if (self.viewModel.showSplash) {
                 Group {
                     if( viewModel.userSession != nil) {
                         ThreadsTabBarView()
-                        
+                            .onAppear{
+                                Task {
+                                    try await  UserService.shared.fectCurrentUser()
+                                }
+                            }
+
                     }else {
                         SignInView()
                     }
@@ -25,7 +31,7 @@ struct ContentView: View {
                 SplashScreenView()
             }
         }  .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 withAnimation {
                     self.viewModel.showSplash = true
                 }

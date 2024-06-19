@@ -12,6 +12,7 @@ import Combine
 class CurrentUserProfileViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var threads = [Thread]()
+    @Published var likes = [Like]()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -19,6 +20,7 @@ class CurrentUserProfileViewModel: ObservableObject {
         setupSubscribers();
         Task {
             try await fetchUserThreads();
+            print("CurrentUserProfileViewModel")
         }
     }
 
@@ -29,10 +31,9 @@ class CurrentUserProfileViewModel: ObservableObject {
         .store(in: &cancellables)
     }
 
-    private func fetchUserThreads() async throws -> [Thread] {
-        if self.currentUser != nil {
-            self.threads =  try await ThreadService.fectUserThreads(uid: self.currentUser!.id )
+    private func fetchUserThreads() async throws  {
+        if let user = self.currentUser?.id {
+            self.threads =  try await ThreadService.fectUserThreads(uid: user )
         }
-        return []
     }
 }

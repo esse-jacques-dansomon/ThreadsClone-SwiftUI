@@ -14,7 +14,7 @@ class FeedsCreationViewModel: ObservableObject {
     @MainActor
     func uploadThread() async throws {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let  threadData = Thread(ownerUid: uid, caption: caption, timestamp: Timestamp(), likes: 0)
+        let  threadData = Thread(ownerUid: uid, caption: caption, timestamp: Timestamp(), likes: 0, reposts: 0)
         try await ThreadService.uploadThread(threadData)
     }
 }

@@ -8,7 +8,9 @@
 import Foundation
 
 class ProfileViewModel: ObservableObject {
+
     @Published var threads = [Thread]()
+
     var user: User
 
     init(user: User) {
@@ -19,7 +21,7 @@ class ProfileViewModel: ObservableObject {
     }
 
 
-    private func fetchUserThreads(id: String) async throws  {
+     func fetchUserThreads(id: String) async throws  {
         self.threads = []
         self.threads =  try await ThreadService.fectUserThreads(uid:  id )
     }

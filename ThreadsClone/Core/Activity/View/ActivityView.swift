@@ -11,48 +11,40 @@ struct ActivityView: View {
     @State var isFixed = false
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading)  {
-
-                    ScrollView(.horizontal) {
-                        HStack {
-                            Text("Activity")
-                                .font(.title)
-                                .bold()
-                            Spacer()
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Activity")
+                        .font(.title)
+                        .bold()
+                    Spacer()
+                }.padding(.horizontal)
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(1...10, id: \.self) { _ in
+                            Text("Text")
+                                .frame(width: 100, height: 40)
+                                .foregroundStyle(.white)
+                                .background(.black)
+                                .cornerRadius(9)
                         }
-                        HStack(alignment: .top) {
-                            ForEach(1...10, id: \.self){ item in
-                                Text("Text")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .background(.black)
-                                    .cornerRadius(20)
+                    }
+                }.scrollIndicators(.hidden)
+                    .padding(.horizontal, 10)
 
-                            }
-                        }
-                    }.padding()
-
-
-
-
-                ScrollView{
-                    //ThreadsUserItemIView()
-                    LazyVStack( alignment: .leading){
-                        ForEach(1...10, id: \.self){ item in
-                           // ThreadItemView()
+                ScrollView {
+                    // ThreadsUserItemIView()
+                    LazyVStack(alignment: .leading) {
+                        ForEach(1...10, id: \.self) { _ in
+                            // ThreadItemView()
                         }
                     }.padding()
                 }
 
                 Spacer()
             }
-
-
         }
     }
 }
-
-
 
 #Preview {
     ActivityView()

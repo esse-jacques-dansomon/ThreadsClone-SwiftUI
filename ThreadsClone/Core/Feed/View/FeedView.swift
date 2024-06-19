@@ -8,29 +8,28 @@
 import SwiftUI
 
 struct FeedView: View {
-    @StateObject var viewModel = FeedViewModel();
+    @EnvironmentObject var viewModel: FeedViewModel
 
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(viewModel.threads, id: \.self) { thread in
-                       ThreadItemView(thread: thread )
+                    ForEach(viewModel.threads) { thread in
+                        ThreadItemView(thread: thread)
                     }
                 }.padding()
             }
             .refreshable {
                 Task {
-                   try await viewModel.fetchThreads()
-                
+                    try await viewModel.fetchThreads()
                 }
             }
             .toolbar {
-                ToolbarItem (placement: .navigationBarTrailing){
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "arrow.counterclockwise")
                 }
             }
-           
+
             .navigationTitle("Threads")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -40,8 +39,10 @@ struct FeedView: View {
 
 struct FeedView_preview: PreviewProvider {
     static var previews: some View {
+
         NavigationStack {
             FeedView()
+                .environmentObject(FeedViewModel())
         }
     }
 }
