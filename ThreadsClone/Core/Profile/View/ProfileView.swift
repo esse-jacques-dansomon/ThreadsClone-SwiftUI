@@ -11,6 +11,12 @@ struct ProfileView: View {
     let user: User
     @EnvironmentObject var viewModel: ExploreViewModel
     @State var openUnfollowSheet = false
+    @StateObject var profileViewModel : ProfileViewModel
+
+    init(user: User) {
+        self.user = user
+        _profileViewModel = StateObject(wrappedValue: ProfileViewModel(user: user))
+    }
 
     var body: some View {
         NavigationStack {
@@ -37,7 +43,13 @@ struct ProfileView: View {
                 }
 
                 // Custom TabView
-                UserContentListView(user: user, isCuurentUser: false)
+                UserContentListView(
+                    user: user,
+                    threads: profileViewModel.threads,
+                    replies: profileViewModel.replies,
+                    reposts: profileViewModel.reposts,
+                    isCuurentUser: false
+                )
             }
             .padding(.horizontal)
             .scrollIndicators(.hidden)

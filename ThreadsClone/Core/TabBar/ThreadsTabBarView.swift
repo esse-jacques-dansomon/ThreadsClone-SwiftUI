@@ -11,9 +11,10 @@ struct ThreadsTabBarView: View {
     @State var selectedTab = 0
     @State var oldSelectedTav = 0
 
-    @StateObject private var viewModel = FeedViewModel()
-    @StateObject private var viewModel2 = FeedDetailsViewModel()
+    @StateObject private var feedViewModel = FeedViewModel()
+    @StateObject private var feedDetailsViewModel = FeedDetailsViewModel()
     @StateObject private var exploreViewModel = ExploreViewModel()
+    @StateObject private var currentUserProfileViewModel = CurrentUserProfileViewModel()
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -65,14 +66,15 @@ struct ThreadsTabBarView: View {
             .tag(4)
             
         }
-        .environmentObject(viewModel)
-        .environmentObject(viewModel2)
+        .environmentObject(currentUserProfileViewModel)
+        .environmentObject(feedViewModel)
+        .environmentObject(feedDetailsViewModel)
         .environmentObject(exploreViewModel)
         .background(.gray)
         .tint(.black)
         .onAppear{
             Task {
-               try await viewModel.fetchThreads()
+               try await feedViewModel.fetchThreads()
             }
         }
 
@@ -81,6 +83,7 @@ struct ThreadsTabBarView: View {
 
 #Preview {
     ThreadsTabBarView()
+        .environmentObject(CurrentUserProfileViewModel())
         .environmentObject(FeedViewModel())
         .environmentObject(FeedDetailsViewModel())
         .environmentObject(ExploreViewModel())

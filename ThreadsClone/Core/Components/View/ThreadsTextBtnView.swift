@@ -28,7 +28,7 @@ struct ThreadsTextBtnView: View {
             .cornerRadius(10)
             .overlay(
                    RoundedRectangle(cornerRadius: 10)
-                       .stroke(background, lineWidth: 1)
+                    .stroke(.black, lineWidth: 1)
                )
 
     }

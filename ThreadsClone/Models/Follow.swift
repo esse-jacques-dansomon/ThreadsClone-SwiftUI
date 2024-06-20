@@ -18,4 +18,7 @@ struct Follow: Identifiable, Codable, Hashable {
     var  id: String {
         return followId ?? NSUUID().uuidString
     }
+
+    var followerUser: User?
+    var followedUser: User?
 }

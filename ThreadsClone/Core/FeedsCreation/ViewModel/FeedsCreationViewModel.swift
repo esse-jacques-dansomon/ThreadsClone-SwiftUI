@@ -17,13 +17,6 @@ class FeedsCreationViewModel: ObservableObject {
     @Published var sucess: Bool = false
     @Published var errorMessage: String? = nil
 
-    @MainActor
-    func uploadThread() async throws {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let  threadData = Thread(ownerUid: uid, caption: caption, timestamp: Timestamp(), likes: 0, reposts: 0)
-        try await ThreadService.uploadThread(threadData)
-    }
-
     func createThread() async {
         guard !caption.isEmpty else {
             errorMessage = "Thread text cannot be empty."
@@ -49,9 +42,14 @@ class FeedsCreationViewModel: ObservableObject {
         let  threadData = Thread(ownerUid: uid, caption: caption, timestamp: Timestamp(), likes: 0, reposts: 0, mediaUrls: mediaUrls )
 
         do {
-            try await ThreadService.uploadThread(threadData)
+            let threadId = try await ThreadService.uploadThread(threadData)
+            if let  threadID = threadId {
+               var activity =  Activity(type: .createdThread, userID: uid, timestamp: Timestamp())
+                activity.threadID = threadID
+            }
             isLoading = false
             sucess = true
+
         } catch {
             errorMessage = "Failed to create thread: \(error.localizedDescription)"
             isLoading = false

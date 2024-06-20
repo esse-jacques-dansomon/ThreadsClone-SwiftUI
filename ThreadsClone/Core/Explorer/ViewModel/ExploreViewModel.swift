@@ -19,8 +19,6 @@ class ExploreViewModel: ObservableObject {
         Task {
             try await fetchUsers()
         }
-        print("followings \(followings)")
-        print("followers \(followers)")
     }
 
     func isFollowingUser(followedID: String) -> Bool {
@@ -37,7 +35,6 @@ class ExploreViewModel: ObservableObject {
 
     private func getCurrentUserFollowers() async throws {
         guard let userID = UserService.shared.currentUser?.id else {
-            print("no getCurrentUserFollowers ")
             return
         }
         self.followers = try await FollowService.userFollowers(userID: userID);

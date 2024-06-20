@@ -9,13 +9,15 @@ import SwiftUI
 
 struct FeedView: View {
     @EnvironmentObject var viewModel: FeedViewModel
+    @EnvironmentObject var currentUserProfileViewModel: CurrentUserProfileViewModel
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.threads) { thread in
-                        ThreadItemView(thread: thread)
+
+                        ThreadItemView(thread: thread, isCurrentUser: thread.user == currentUserProfileViewModel.currentUser )
                     }
                 }.padding()
             }

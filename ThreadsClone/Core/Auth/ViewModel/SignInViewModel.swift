@@ -38,13 +38,11 @@ class SignInViewModel: ObservableObject {
         do {
             try await AuthService.shared.login(withEmail: email, password: password)
         } catch let err  {
-            print("DEBUG: Error code \(err)")
             self.error = self.mapAuthError(err as NSError)
         }
     }
 
     private func mapAuthError(_ error : NSError) -> SignInError {
-        print("DEBUG: Error code \(error)")
         if let err = error as NSError? {
             let errCode = AuthErrorCode(_nsError: err)
             _ = errCode.localizedDescription

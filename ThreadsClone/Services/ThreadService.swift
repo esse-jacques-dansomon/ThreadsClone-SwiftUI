@@ -11,9 +11,11 @@ import Foundation
 
 class ThreadService {
 
-    static func uploadThread(_ thread: Thread) async throws {
-        guard let threadData = try? Firestore.Encoder().encode(thread) else { return }
-        try await Firestore.firestore().collection("threads").addDocument(data: threadData)
+    static func uploadThread(_ thread: Thread) async throws -> String? {
+        guard let threadData = try? Firestore.Encoder().encode(thread) else { return nil }
+      let documentRef = try await Firestore.firestore().collection("threads").addDocument(data: threadData)
+
+        return  try await documentRef.getDocument(as: Thread.self).id
     }
 
     static func fectThreads() async throws -> [Thread] {

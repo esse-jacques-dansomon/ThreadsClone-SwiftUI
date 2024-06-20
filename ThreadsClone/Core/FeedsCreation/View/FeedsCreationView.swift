@@ -137,15 +137,13 @@ struct FeedsCreationView: View {
 
                 ToolbarItem(placement: .topBarTrailing) {
                     if viewModel.isLoading {
-                        ProgressView("Creating thread...")
+                        ProgressView()
                     } else {
-
                         Button {
                             Task {
                                 await viewModel.createThread()
-                                 if viewModel.sucess {
+                                if viewModel.sucess {
                                     selectedTab = oldSelectedTav
-
                                 }
                             }
 

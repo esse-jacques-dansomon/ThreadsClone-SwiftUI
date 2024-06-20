@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrentUserProfile: View {
     @State var showEditView = false;
-    @StateObject var viewModel = CurrentUserProfileViewModel()
+    @EnvironmentObject var viewModel :  CurrentUserProfileViewModel
 
     private var currentUser: User? {
         return viewModel.currentUser
@@ -68,7 +68,12 @@ struct CurrentUserProfile: View {
 
                     // Custom TabView
                     if let user = currentUser {
-                        UserContentListView(user: user, isCuurentUser: true)
+                        UserContentListView(
+                            user: user,
+                            threads: viewModel.threads,
+                            replies: viewModel.replies,
+                            reposts: viewModel.reposts,
+                            isCuurentUser: true)
                     }
 
 

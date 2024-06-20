@@ -21,7 +21,6 @@ class EditProfileViewModel: ObservableObject {
     private var uiImage: UIImage?
 
     func updateUserData() async  throws {
-        print("Debug: update users")
         try await updateProfileImage()
     }
 

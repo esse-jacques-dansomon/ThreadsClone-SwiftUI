@@ -48,18 +48,6 @@ class FollowService {
         print("User unfollowed successfully")
     }
 
-//    static func unfollowUser(followerUid: String, followedUid: String) async throws {
-//        let db = Firestore.firestore()
-//        let querySnapshot = try await db.collection("followers")
-//            .whereField("followerUid", isEqualTo: followerUid)
-//            .whereField("followedUid", isEqualTo: followedUid)
-//            .getDocuments()
-//
-//        for document in querySnapshot.documents {
-//             try await document.reference.delete()
-//         }
-//    }
-
 
    static func userFollowers(userID: String) async throws -> [Follow] {
         let db = Firestore.firestore()

@@ -18,4 +18,6 @@ struct Like: Identifiable, Codable {
     var  id: String {
         return likeId ?? NSUUID().uuidString
     }
+
+    var thread: Thread?
 }

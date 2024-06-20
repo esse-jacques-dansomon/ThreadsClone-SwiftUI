@@ -12,7 +12,6 @@ import Foundation
 @MainActor
 class LikeService {
 
-
     static func likeThread(userId: String, threadId: String) {
         let db = Firestore.firestore()
 
@@ -81,8 +80,6 @@ class LikeService {
             }
     }
 
-
-    @MainActor
     static func userHasLikedThread(userId: String, threadId: String) async throws -> Bool {
         let snapshot = try await Firestore.firestore()
             .collection("likes")
@@ -91,5 +88,14 @@ class LikeService {
             .getDocuments()
 
         return snapshot.documents.isEmpty ? false : true
+    }   
+
+    static func fetchUserLikes(userId: String) async throws -> [Like] {
+        let snapshot = try await Firestore.firestore()
+            .collection("likes")
+            .whereField("userId", isEqualTo: userId)
+            .getDocuments()
+
+        return  snapshot.documents.compactMap{try? $0.data(as: Like.self)}
     }
 }

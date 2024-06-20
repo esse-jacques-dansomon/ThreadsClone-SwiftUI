@@ -25,8 +25,8 @@ class FeedViewModel: ObservableObject {
                 let ownerUid = thread.ownerUid
                 let threadUser = try await UserService.fectUser(withUid: ownerUid)
                 threads[i].user = threadUser
-
-                guard let uid = UserService.shared.currentUser?.id else { return }
+                
+                guard let uid = UserService.shared.currentUser?.id else { return  }
                 let hasLiked = try await LikeService.userHasLikedThread(userId: uid, threadId: thread.id)
                 threads[i].connectedUserHasLiked = hasLiked
             
@@ -65,6 +65,9 @@ class FeedViewModel: ObservableObject {
                 threads[index] = updatedThread
                 print(updatedThread.likes)
             }
-        } catch {}
+        } catch {
+            print("Error reload : \(error)")
+
+        }
     }
 }

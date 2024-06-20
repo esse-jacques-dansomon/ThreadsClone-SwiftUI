@@ -21,7 +21,7 @@ class UserContentViewModel: ObservableObject {
         Task {
             try await fetchUserThreads()
             try await fetchUserReplies()
-            //try await fetchUserReposts(ownerId: user.id)
+            try await fetchUserReposts(ownerId: user.id)
         }
     }
 
