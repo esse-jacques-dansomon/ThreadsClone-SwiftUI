@@ -81,4 +81,8 @@ struct ThreadsTabBarView: View {
 
 #Preview {
     ThreadsTabBarView()
+        .environmentObject(FeedViewModel())
+        .environmentObject(FeedDetailsViewModel())
+        .environmentObject(ExploreViewModel())
+
 }

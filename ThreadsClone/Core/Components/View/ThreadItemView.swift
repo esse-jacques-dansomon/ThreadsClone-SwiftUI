@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ThreadItemView: View {
     var thread: Thread
@@ -38,10 +39,28 @@ struct ThreadItemView: View {
                                         .font(.footnote)
 
                                 }
+                                
                             }
 
                             .padding(0)
                             .navigationBarTitleDisplayMode(.inline)
+
+                            if let mediaUrls = thread.mediaUrls {
+                                ScrollView(.horizontal) {
+                                    HStack(spacing: 20) {
+                                        ForEach(0 ..< mediaUrls.count, id: \.self) { index in
+                                            KFImage(
+                                               URL(string: mediaUrls[index]))
+                                            .resizable()
+                                            .scaledToFill()
+                                        }
+                                    }
+                                }
+                                .scrollIndicators(.hidden)
+                                .frame(maxHeight: 300)
+                                .padding(.bottom)
+                            }
+
                             ThreadItemViewButtons(thread: thread)
                                 .padding(.bottom, 5)
                                 .foregroundColor(.black)
@@ -74,6 +93,7 @@ struct ThreadItemView_preview: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             ThreadItemView(thread: dev.thread, isCurrentUser: false)
+
         }
     }
 }

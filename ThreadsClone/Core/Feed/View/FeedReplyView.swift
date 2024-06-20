@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FeedReplyView: View {
     var thread: Thread
@@ -30,10 +31,27 @@ struct FeedReplyView: View {
                                 .multilineTextAlignment(.leading)
                                 .font(.footnote)
                         }
-                        
+
+
                         Spacer()
 
                     }.padding()
+                    if let mediaUrls = thread.mediaUrls {
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 20) {
+                                ForEach(0 ..< mediaUrls.count, id: \.self) { index in
+                                    KFImage(
+                                       URL(string: mediaUrls[index]))
+                                    .resizable()
+                                    .scaledToFit()
+
+                                }
+                            }
+                        }
+                        .scrollIndicators(.hidden)
+                        .frame(maxHeight: 250)
+                        .padding(.horizontal)
+                    }
 
                     Divider()
 

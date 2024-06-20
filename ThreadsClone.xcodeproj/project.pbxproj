@@ -77,6 +77,8 @@
 		40ACEFD42C23220A00797A0E /* FollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFD32C23220A00797A0E /* FollowService.swift */; };
 		40ACEFD62C23271300797A0E /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFD52C23271300797A0E /* ActivityService.swift */; };
 		40ACEFDA2C236F0900797A0E /* UnfollowSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFD92C236F0900797A0E /* UnfollowSheetView.swift */; };
+		40ACEFDC2C2394A500797A0E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFDB2C2394A400797A0E /* ImagePicker.swift */; };
+		40ACEFDE2C2394B900797A0E /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFDD2C2394B800797A0E /* VideoPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,8 @@
 		40ACEFD32C23220A00797A0E /* FollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowService.swift; sourceTree = "<group>"; };
 		40ACEFD52C23271300797A0E /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		40ACEFD92C236F0900797A0E /* UnfollowSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfollowSheetView.swift; sourceTree = "<group>"; };
+		40ACEFDB2C2394A400797A0E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		40ACEFDD2C2394B800797A0E /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +377,8 @@
 			children = (
 				405E75E02C0AA50600315324 /* GoogleService-Info.plist */,
 				4016E02F2C093DF900AFA35D /* ViewModifier */,
+				40ACEFDB2C2394A400797A0E /* ImagePicker.swift */,
+				40ACEFDD2C2394B800797A0E /* VideoPicker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -703,6 +709,7 @@
 				40ACEFC42C21AB0000797A0E /* Activity.swift in Sources */,
 				40ACEFB22C20E4C700797A0E /* Repost.swift in Sources */,
 				40ACEFC92C21FABB00797A0E /* ThreadItemViewButtons.swift in Sources */,
+				40ACEFDC2C2394A500797A0E /* ImagePicker.swift in Sources */,
 				40ACEF912C201E8300797A0E /* ProfileHeaderView.swift in Sources */,
 				4097842E2C092F250010F509 /* ThreadsTextBtnView.swift in Sources */,
 				409784262C092DF00010F509 /* SignInView.swift in Sources */,
@@ -718,6 +725,7 @@
 				40ACEFC72C21F49200797A0E /* FeedDetailsView.swift in Sources */,
 				40ACEFD42C23220A00797A0E /* FollowService.swift in Sources */,
 				40ACEFAC2C20A26B00797A0E /* UserContentViewModel.swift in Sources */,
+				40ACEFDE2C2394B900797A0E /* VideoPicker.swift in Sources */,
 				40ACEFA82C209D9B00797A0E /* ProfileViewModel.swift in Sources */,
 				40ACEF732C1F038D00797A0E /* ContentViewModel.swift in Sources */,
 				40ACEFA12C2059B800797A0E /* FeedsCreationViewModel.swift in Sources */,

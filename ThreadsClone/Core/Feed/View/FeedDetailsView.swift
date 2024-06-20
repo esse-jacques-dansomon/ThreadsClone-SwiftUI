@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FeedDetailsView: View {
     var thread: Thread
@@ -29,6 +30,20 @@ struct FeedDetailsView: View {
                 HStack {
                     Text(thread.caption)
                     Spacer()
+                    
+                }
+
+                if let mediaUrls = thread.mediaUrls {
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 20) {
+                            ForEach(0 ..< mediaUrls.count, id: \.self) { index in
+                                KFImage(
+                                   URL(string: mediaUrls[index]))
+                                .resizable()
+                                .scaledToFill()
+                            }
+                        }
+                    }.padding(.bottom)
                 }
 
                 ThreadItemViewButtons(thread: thread)

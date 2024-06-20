@@ -64,7 +64,7 @@ struct EditProfileView: View {
                     }
 
                     Divider()
-                    Toggle("Provate profile", isOn: $toogle)
+                    Toggle("Private profile", isOn: $toogle)
                 }
                 .padding()
                 .background(.white)

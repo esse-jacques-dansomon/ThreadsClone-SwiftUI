@@ -19,7 +19,7 @@ struct Thread: Identifiable, Codable, Hashable {
     var  id: String {
         return threadId ?? NSUUID().uuidString
     }
-    //var files: [String]?
+    var mediaUrls: [String]?
 
     var user: User?
     var connectedUserHasLiked: Bool? 
