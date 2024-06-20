@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     let user: User
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @EnvironmentObject var viewModel: CurrentUserProfileViewModel
     @State var openUnfollowSheet = false
     @StateObject var profileViewModel : ProfileViewModel
 

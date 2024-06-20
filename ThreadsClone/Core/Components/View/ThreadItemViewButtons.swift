@@ -18,16 +18,20 @@ struct ThreadItemViewButtons: View {
                 Button {
                     Task {
                         if thread.connectedUserHasLiked != nil && thread.connectedUserHasLiked == true {
-                           try await viewModel.unLikeThread(thread: thread)
+                           //try await viewModel.unLikeThread(thread: thread)
+                            print("unlike")
                         } else {
-                           try await viewModel.likeThread(thread: thread)
+                            print("like")
                         }
+
+                        try await viewModel.likeThread(thread: thread)
+
 
                     }
                 } label: {
                     HStack(alignment: .center, spacing: 3) {
-                        Image(systemName: thread.connectedUserHasLiked != nil && thread.connectedUserHasLiked == true ? "heart.fill" : "heart")
-                            .foregroundColor( thread.connectedUserHasLiked != nil && thread.connectedUserHasLiked == true ? .red : .black )
+                        Image(systemName: thread.connectedUserHasLiked == true ? "heart.fill" : "heart")
+                            .foregroundColor( thread.connectedUserHasLiked == true ? .red : .black )
 
                         Text("\(thread.likes > 0 ? "\(thread.likes)" : "")")
                             .font(.footnote)

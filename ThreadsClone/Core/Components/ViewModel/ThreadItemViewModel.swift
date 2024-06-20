@@ -10,9 +10,14 @@ import Foundation
 class ThreadItemViewModel: ObservableObject {
 
     @MainActor
-    func likeThread(threadId: String)  {
+    func likeThread(threadId: String)  async throws {
         guard let uid = UserService.shared.currentUser?.id else { return }
-        LikeService.likeThread(userId: uid, threadId: threadId)
+        do {
+            try await LikeService.likeThread(userId: uid, threadId: threadId)
+
+        }catch {
+            print("Error when liking")
+        }
     }
 
     @MainActor 

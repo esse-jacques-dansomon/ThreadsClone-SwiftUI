@@ -10,7 +10,7 @@ import SwiftUI
 struct UnfollowSheetView: View {
     let user: User
     @Binding var openUnfollowSheet : Bool
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @EnvironmentObject var viewModel: CurrentUserProfileViewModel
 
     var body: some View {
         ZStack {
@@ -63,6 +63,6 @@ struct UnfollowSheetView: View {
 struct UnfollowSheetView_Preview: PreviewProvider {
     static var previews: some View {
         UnfollowSheetView(user: dev.user, openUnfollowSheet: .constant(false))
-            .environmentObject(ExploreViewModel())
+            .environmentObject(CurrentUserProfileViewModel())
     }
 }

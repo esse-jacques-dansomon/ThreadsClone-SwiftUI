@@ -10,7 +10,7 @@ import SwiftUI
 struct ThreadsUserItemIView: View {
     let user: User
 
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @EnvironmentObject var viewModel: CurrentUserProfileViewModel
     @State var openUnfollowSheet = false
 
     var body: some View {

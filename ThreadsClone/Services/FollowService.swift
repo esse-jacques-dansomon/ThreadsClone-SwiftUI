@@ -13,7 +13,9 @@ import FirebaseFirestoreSwift
 class FollowService {
 
 
-    static func followUser(follow: Follow) async throws -> Follow? {
+    static func followUser( followerUid: String ,followedUid: String ) async  throws -> Follow? {
+        var follow = Follow(followerUid: followerUid, followedUid: followedUid, timestamp: Timestamp())
+
         let db = Firestore.firestore()
          // Check for existing follow relationship
          let querySnapshot = try await db.collection("followers")
