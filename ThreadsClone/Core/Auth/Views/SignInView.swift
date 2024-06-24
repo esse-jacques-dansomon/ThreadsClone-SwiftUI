@@ -33,7 +33,7 @@ struct SignInView: View {
                         ForgotPasswordView()
                     } label: {
                         Text("Forget Password")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
@@ -59,10 +59,10 @@ struct SignInView: View {
                 } label: {
                     HStack(alignment: .center) {
                         Text("Don't have an account?")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
 
                         Text("Sign Up")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
                             .bold()
                         
                     }.padding()
@@ -72,6 +72,7 @@ struct SignInView: View {
                 Alert(title: Text("Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
             }
         }
+        .background(Theme.backgroundColor)
     }
 }
 

@@ -43,12 +43,14 @@ class CurrentUserProfileViewModel: ObservableObject {
     }
 
     private func fetchUserThreads() async throws {
-        if let user = self.currentUser?.id {
-            self.threads = try await ThreadService.fectUserThreads(uid: user)
+        if let userId = self.currentUser?.id {
+            self.threads = try await ThreadService.fectUserThreads(uid: userId)
             for i in 0 ..< self.threads.count {
                 self.threads[i].user = self.currentUser
+                let hasLiked = try await LikeService.userHasLikedThread(userId: userId , threadId: threads[i].id)
+                self.threads[i].connectedUserHasLiked = hasLiked
             }
-            self.threads = self.threads
+//            self.threads = self.threads
         }
         print("fetchUserThreads .\(self.threads.count)")
     }
@@ -115,12 +117,10 @@ class CurrentUserProfileViewModel: ObservableObject {
 
     func followerUser(followedUserID: String) async throws {
         guard let followerId = currentUser?.id else { return }
-        let follow = try await FollowService.followUser(followerUid: followerId, followedUid: followedUserID)
+        _ = try await FollowService.followUser(followerUid: followerId, followedUid: followedUserID)
         // reload userFollow
-        if let f = follow {
-            try await self.getCurrentUserFollowers()
-            try await self.getCurrentUserFollowings()
-        }
+        try await self.getCurrentUserFollowers()
+        try await self.getCurrentUserFollowings()
     }
 
     func unFollowerUser(followedUid: String) async throws {

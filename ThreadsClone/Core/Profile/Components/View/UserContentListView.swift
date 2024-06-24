@@ -11,16 +11,12 @@ struct UserContentListView: View {
     @State var selectedTabView = ProfileThreadsFilter.Threads
     @Namespace var animation;
 
-//    @StateObject var viewModel: UserContentViewModel
     var threads: [Thread]
     var replies: [Reply]
     var reposts: [Repost]
 
-    var isCurrentUser = false
 
-    init(user: User,threads: [Thread], replies: [Reply], reposts: [Repost], isCuurentUser: Bool) {
-//        self._viewModel = StateObject(wrappedValue: UserContentViewModel(user: user))
-        self.isCurrentUser = isCuurentUser
+    init(user: User,threads: [Thread], replies: [Reply], reposts: [Repost]) {
         self.threads = threads
         self.replies = replies
         self.reposts = reposts
@@ -41,7 +37,7 @@ struct UserContentListView: View {
                         HStack {
                             if selectedTabView == item {
                                 Rectangle()
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Theme.textColor)
                                     .frame(height: 1.5)
                                     .matchedGeometryEffect(id: "ID", in: animation)
                             } else {
@@ -63,7 +59,7 @@ struct UserContentListView: View {
             case .Threads:
                 LazyVStack {
                     ForEach(threads) { thread in
-                        ThreadItemView(thread: thread, isCurrentUser: isCurrentUser)
+                        ThreadItemView(thread: thread, isCurrentUser: true)
                     }
                 }
             case .Replies:

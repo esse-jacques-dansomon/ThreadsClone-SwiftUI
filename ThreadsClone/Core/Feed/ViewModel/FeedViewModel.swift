@@ -19,15 +19,19 @@ class FeedViewModel: ObservableObject {
 
     @MainActor
     func fetchUserThreads() async throws {
-        guard let uid = UserService.shared.currentUser?.id else { return }
         do {
             for i in 0 ..< threads.count {
                 let thread = threads[i]
                 let ownerUid = thread.ownerUid
+
+
                 let threadUser = try await UserService.fectUser(withUid: ownerUid)
                 threads[i].user = threadUser
-                let hasLiked = try await LikeService.userHasLikedThread(userId: uid, threadId: thread.id)
-                threads[i].connectedUserHasLiked = hasLiked
+                if let uid = UserService.shared.currentUser?.id  {
+                    let hasLiked = try await LikeService.userHasLikedThread(userId: uid, threadId: thread.id)
+                    threads[i].connectedUserHasLiked = hasLiked
+                }
+
             }
 
         } catch {

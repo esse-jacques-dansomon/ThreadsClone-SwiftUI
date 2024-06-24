@@ -47,8 +47,8 @@ struct ProfileView: View {
                     user: user,
                     threads: profileViewModel.threads,
                     replies: profileViewModel.replies,
-                    reposts: profileViewModel.reposts,
-                    isCuurentUser: false
+                    reposts: profileViewModel.reposts
+
                 )
             }
             .padding(.horizontal)

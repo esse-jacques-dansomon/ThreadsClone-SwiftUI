@@ -9,31 +9,38 @@ import SwiftUI
 
 struct SplashScreenView: View {
     var body: some View {
-        Color.init(white: 3)
+        Theme.backgroundColor
             .ignoresSafeArea()
             .overlay{
                 VStack {
                     Spacer()
                     Image("logo")
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 100, height: 100)
-                        .foregroundColor(.black)
+                        .foregroundColor(Theme.textColor)
                         .symbolEffect(.pulse, isActive: true)
 
                     Spacer()
                     VStack {
                         Text("from")
                             .font(.caption)
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(Theme.textColor)
                         Image("meta")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 70, height: 20)
                     }
                 }
-            }.foregroundStyle(.white)
+            }
+            .foregroundStyle(Theme.textColor)
     }
+}
+
+#Preview {
+    SplashScreenView()
 }
 #Preview {
     SplashScreenView()
+        .preferredColorScheme(.dark)
 }

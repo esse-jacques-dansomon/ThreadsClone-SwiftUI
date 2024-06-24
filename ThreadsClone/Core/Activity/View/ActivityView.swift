@@ -33,8 +33,8 @@ struct ActivityView: View {
                             } label: {
                                 Text(item.title)
                                     .frame(width: 100, height: 40)
-                                    .foregroundStyle(selectedTabView.id == item.id ? .white : .black)
-                                    .background(selectedTabView.id == item.id ? .black : Color(.systemGray5))
+                                    .foregroundStyle(selectedTabView.id == item.id ? Theme.backgroundColor : Theme.textColor)
+                                    .background(selectedTabView.id == item.id ? Theme.textColor : Color(.systemGray5))
                                     .cornerRadius(9)
                             }
                         }

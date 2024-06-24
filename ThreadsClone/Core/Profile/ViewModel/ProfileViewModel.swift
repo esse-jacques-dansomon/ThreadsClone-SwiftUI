@@ -27,9 +27,14 @@ class ProfileViewModel: ObservableObject {
     @MainActor
     private func fetchUserThreads() async throws  {
         self.threads = []
-        var threads =  try await ThreadService.fectUserThreads(uid:  self.user.id )
+        self.threads =  try await ThreadService.fectUserThreads(uid:  self.user.id )
         for i in 0 ..< threads.count {
             threads[i].user = self.user
+            var hasLiked = false
+            if let connectedUserId =  UserService.shared.currentUser?.id {
+                hasLiked = try await LikeService.userHasLikedThread(userId: connectedUserId , threadId: threads[i].id)
+            }
+            threads[i].connectedUserHasLiked = hasLiked
         }
         self.threads = threads
         print("Profile user threads \( self.user.fullname ) \(self.threads)")

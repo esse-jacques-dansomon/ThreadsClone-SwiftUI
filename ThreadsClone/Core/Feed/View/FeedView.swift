@@ -14,27 +14,26 @@ struct FeedView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+
                 LazyVStack {
+                    Image("logo")
+                        .resizable()
+                        .frame(width: 40, height: 40)
                     ForEach(viewModel.threads) { thread in
 
                         ThreadItemView(thread: thread, isCurrentUser: thread.user == currentUserProfileViewModel.currentUser )
                     }
                 }.padding()
             }
+            .safeAreaPadding(.all)
+            .scrollIndicators(.hidden)
             .refreshable {
                 Task {
                     try await viewModel.fetchThreads()
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: "arrow.counterclockwise")
-                }
-            }
-
-            .navigationTitle("Threads")
-            .navigationBarTitleDisplayMode(.inline)
         }
+
     }
 }
 

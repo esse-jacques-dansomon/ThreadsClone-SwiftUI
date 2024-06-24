@@ -60,10 +60,10 @@ struct SignUpView: View {
                 } label: {
                     HStack(alignment: .center) {
                         Text("Have an account?")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
 
                         Text("Sign In")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
                             .underline()
                     }.padding()
                 }

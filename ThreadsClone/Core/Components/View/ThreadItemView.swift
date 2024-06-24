@@ -62,8 +62,7 @@ struct ThreadItemView: View {
                             }
 
                             ThreadItemViewButtons(thread: thread)
-                                .padding(.bottom, 5)
-                                .foregroundColor(.black)
+                                .padding(.vertical, 5)
                         }
 
 
@@ -79,7 +78,7 @@ struct ThreadItemView: View {
                             .foregroundStyle(.gray)
                         Button {} label: {
                             Image(systemName: "ellipsis")
-                                .foregroundColor(.black)
+                                .foregroundColor(Theme.textColor)
                         }
                     }
                 }

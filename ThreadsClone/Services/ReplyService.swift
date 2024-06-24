@@ -30,8 +30,9 @@ class ReplyService {
         let replies = snapshot.documents.compactMap {
             try? $0.data(as: Reply.self)
         }
+        
 
-        return replies;
+        return replies.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() });
     }
 
     static func fetchRepliesByUser(ownerId: String) async throws -> [Reply] {
@@ -43,7 +44,7 @@ class ReplyService {
             try? $0.data(as: Reply.self)
         }
 
-        return replies;
+        return replies.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() });
     }
 
 }

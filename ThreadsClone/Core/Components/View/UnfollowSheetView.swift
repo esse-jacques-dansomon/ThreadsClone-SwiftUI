@@ -14,7 +14,7 @@ struct UnfollowSheetView: View {
 
     var body: some View {
         ZStack {
-            Color(.systemGroupedBackground)
+            Theme.backgroundColor
                 .edgesIgnoringSafeArea([.bottom, .horizontal])
 
             VStack(alignment: .center) {
@@ -24,7 +24,7 @@ struct UnfollowSheetView: View {
                         Text("Unfollow")
                         Text("\(user.username)").bold()
                         Text("?")
-                    }.foregroundStyle(.black).padding(.bottom)
+                    }.foregroundStyle(Theme.textColor).padding(.bottom)
 
                     Divider()
                     Button {
@@ -49,7 +49,7 @@ struct UnfollowSheetView: View {
                         HStack {
                             Spacer()
                             Text("Cancel")
-                                .foregroundStyle(.black)
+                                .foregroundStyle(Theme.textColor)
                             Spacer()
                         }.padding(.top)
                     }

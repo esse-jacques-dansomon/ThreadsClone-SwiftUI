@@ -26,6 +26,8 @@ struct ExplorerView: View {
                     }
                 }
             }
+            .background(Theme.backgroundColor)
+            .foregroundColor(Theme.textColor)
             .navigationTitle("Search")
             .searchable(text: $search, prompt: "Search")
             

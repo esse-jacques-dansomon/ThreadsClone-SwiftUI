@@ -82,6 +82,7 @@
 		40ACEFE02C242F0A00797A0E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFDF2C242F0A00797A0E /* AppState.swift */; };
 		40ACEFE32C243C1C00797A0E /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFE22C243C1C00797A0E /* ViewState.swift */; };
 		40ACEFE62C24403400797A0E /* ActivityVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFE52C24403400797A0E /* ActivityVIewModel.swift */; };
+		40ACEFE82C24B72900797A0E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ACEFE72C24B72900797A0E /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		40ACEFDF2C242F0A00797A0E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		40ACEFE22C243C1C00797A0E /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		40ACEFE52C24403400797A0E /* ActivityVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityVIewModel.swift; sourceTree = "<group>"; };
+		40ACEFE72C24B72900797A0E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,9 +524,9 @@
 		40ACEF852C1F95AE00797A0E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				40ACEF862C1F95C200797A0E /* CurrentUserProfileViewModel.swift */,
-				40ACEF942C20327C00797A0E /* EditProfileViewModel.swift */,
 				40ACEFA72C209D9B00797A0E /* ProfileViewModel.swift */,
+				40ACEF942C20327C00797A0E /* EditProfileViewModel.swift */,
+				40ACEF862C1F95C200797A0E /* CurrentUserProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -616,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				40ACEFE22C243C1C00797A0E /* ViewState.swift */,
+				40ACEFE72C24B72900797A0E /* Theme.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				4016E03F2C09511B00AFA35D /* FeedView.swift in Sources */,
 				4016E0342C094AAE00AFA35D /* ThreadsTabBarView.swift in Sources */,
 				40ACEF752C1F1BA600797A0E /* SignInViewModel.swift in Sources */,
+				40ACEFE82C24B72900797A0E /* Theme.swift in Sources */,
 				40ACEFBA2C2180F500797A0E /* ReplyService.swift in Sources */,
 				4016E0412C09513400AFA35D /* ProfileView.swift in Sources */,
 				40ACEF952C20327C00797A0E /* EditProfileViewModel.swift in Sources */,

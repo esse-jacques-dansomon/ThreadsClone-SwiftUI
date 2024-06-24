@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThreadsUserItemIView: View {
     let user: User
-
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var viewModel: CurrentUserProfileViewModel
     @State var openUnfollowSheet = false
 
@@ -39,12 +39,12 @@ struct ThreadsUserItemIView: View {
                 Text(viewModel.isFollowingUser(followedID: user.id) ? "Following" : "Follow")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(viewModel.isFollowingUser(followedID: user.id) ? .gray : .black)
                     .frame(width: 105, height: 32)
                     .cornerRadius(10)
+                    .foregroundColor(Theme.textColor)
                     .overlay {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.systemGray4), lineWidth: 1)
+                            .stroke(Theme.textColor , lineWidth: 1)
                     }
             }
         }
@@ -59,6 +59,6 @@ struct ThreadsUserItemIView: View {
 struct UserCell_Preview: PreviewProvider {
     static var previews: some View {
         ThreadsUserItemIView(user: dev.user)
-            .environmentObject(ExploreViewModel())
+            .environmentObject(CurrentUserProfileViewModel())
     }
 }

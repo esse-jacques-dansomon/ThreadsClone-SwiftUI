@@ -33,7 +33,7 @@ struct ReplyItemView: View {
                         .foregroundStyle(.gray)
                     Button {} label: {
                         Image(systemName: "ellipsis")
-                            .foregroundColor(.black)
+                            .foregroundColor(Theme.textColor)
                     }
                 }
 

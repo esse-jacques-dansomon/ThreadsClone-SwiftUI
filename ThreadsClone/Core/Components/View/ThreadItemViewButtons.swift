@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ThreadItemViewButtons: View {
     var thread : Thread
     @EnvironmentObject var viewModel: FeedViewModel
@@ -14,24 +15,14 @@ struct ThreadItemViewButtons: View {
 
     var body: some View {
         HStack {
-            //if let connectedUserHasLiked = thread.connectedUserHasLiked {
                 Button {
                     Task {
-                        if thread.connectedUserHasLiked != nil && thread.connectedUserHasLiked == true {
-                           //try await viewModel.unLikeThread(thread: thread)
-                            print("unlike")
-                        } else {
-                            print("like")
-                        }
-
                         try await viewModel.likeThread(thread: thread)
-
-
                     }
                 } label: {
                     HStack(alignment: .center, spacing: 3) {
                         Image(systemName: thread.connectedUserHasLiked == true ? "heart.fill" : "heart")
-                            .foregroundColor( thread.connectedUserHasLiked == true ? .red : .black )
+                            .foregroundColor( thread.connectedUserHasLiked == true ? .red : Theme.textColor )
 
                         Text("\(thread.likes > 0 ? "\(thread.likes)" : "")")
                             .font(.footnote)
@@ -41,7 +32,6 @@ struct ThreadItemViewButtons: View {
 
             Button {
                 showReplySheet.toggle()
-                print("Open reply")
             } label: {
                 HStack(alignment: .center, spacing: 3) {
                     Image(systemName: "bubble.right")
@@ -52,11 +42,12 @@ struct ThreadItemViewButtons: View {
                 Image(systemName: "arrow.rectanglepath")
             }
 
-            Button {} label: {
+
+            ShareLink(item: URL(string: "https://www.linkedin.com/in/esse-jacques-dansomon/")!) {
                 Image(systemName: "paperplane")
-            }
+                }
         }
-        .foregroundColor(.black)
+        .foregroundColor(Theme.textColor)
         .sheet(isPresented: $showReplySheet, content: {
                 FeedReplyView(thread: thread);
         })

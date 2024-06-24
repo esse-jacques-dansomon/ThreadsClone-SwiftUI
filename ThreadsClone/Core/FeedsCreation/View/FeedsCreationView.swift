@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FeedsCreationView: View {
     @Binding var selectedTab: Int
-    @Binding var oldSelectedTav: Int
+    @Binding var oldSelectedTab: Int
 
     @State private var isShowingImagePicker = false
     @State private var isShowingVideoPicker = false
@@ -127,11 +127,11 @@ struct FeedsCreationView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        selectedTab = oldSelectedTav
+                        selectedTab = oldSelectedTab
 
                     }) {
                         Text("Cancel")
-                            .foregroundColor(.black)
+                            .foregroundColor(Theme.textColor)
                     }
                 }
 
@@ -143,24 +143,26 @@ struct FeedsCreationView: View {
                             Task {
                                 await viewModel.createThread()
                                 if viewModel.sucess {
-                                    selectedTab = oldSelectedTav
+                                    selectedTab = oldSelectedTab
                                 }
                             }
 
                         } label: {
                             Text("Post")
                                 .bold()
-                                .foregroundStyle(.black)
+                                .foregroundStyle(Theme.textColor)
                         }
                     }
                 }
             }
         }
+        .ignoresSafeArea()
+        .background(Theme.backgroundColor)
     }
 }
 
 #Preview {
     FeedsCreationView(
-        selectedTab: .constant(2), oldSelectedTav: .constant(3)
+        selectedTab: .constant(2), oldSelectedTab: .constant(3)
     )
 }

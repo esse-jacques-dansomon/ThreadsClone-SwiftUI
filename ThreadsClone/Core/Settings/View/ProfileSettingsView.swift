@@ -22,9 +22,7 @@ struct ProfileSettingsView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "person.badge.plus")
-                                    .foregroundColor(.black)
                                 Text("Follow and invite friends")
-                                    .foregroundColor(.black)
                                 Spacer()
                             }
                         }
@@ -35,9 +33,7 @@ struct ProfileSettingsView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "bell")
-                                    .foregroundColor(.black)
                                 Text("Notifications")
-                                    .foregroundColor(.black)
                                 Spacer()
                             }
                         }
@@ -48,9 +44,7 @@ struct ProfileSettingsView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "bookmark")
-                                    .foregroundColor(.black)
                                 Text("Saved")
-                                    .foregroundColor(.black)
                                 Spacer()
                             }
                         }
@@ -61,9 +55,7 @@ struct ProfileSettingsView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "heart")
-                                    .foregroundColor(.black)
                                 Text("Your likes")
-                                    .foregroundColor(.black)
                                 Spacer()
                             }
                         }
@@ -74,9 +66,7 @@ struct ProfileSettingsView: View {
                         } label: {
                         HStack {
                             Image(systemName: "lock")
-                                .foregroundColor(.black)
                             Text("Privacy")
-                                .foregroundColor(.black)
                             Spacer()
                         }
                         }
@@ -87,9 +77,7 @@ struct ProfileSettingsView: View {
                         } label: {
                         HStack {
                             Image(systemName: "person")
-                                .foregroundColor(.black)
                             Text("Account")
-                                .foregroundColor(.black)
                             Spacer()
                         }
                         }
@@ -100,9 +88,7 @@ struct ProfileSettingsView: View {
                         } label: {
                         HStack {
                             Image(systemName: "questionmark.circle")
-                                .foregroundColor(.black)
                             Text("Help")
-                                .foregroundColor(.black)
                             Spacer()
                         }
                         }
@@ -114,9 +100,7 @@ struct ProfileSettingsView: View {
                         } label: {
                         HStack {
                             Image(systemName: "info.circle")
-                                .foregroundColor(.black)
                             Text("About")
-                                .foregroundColor(.black)
                             Spacer()
                         }
                         }
@@ -124,7 +108,9 @@ struct ProfileSettingsView: View {
 
 
 
-                    }.padding()
+                    }
+                    .foregroundColor(Theme.textColor)
+                    .padding()
                     Divider()
                     NavigationLink {
 
@@ -158,10 +144,10 @@ struct ProfileSettingsView: View {
                     }label: {
                         HStack {
                             Image(systemName: "chevron.backward")
-                                .foregroundColor(.black)
                             Text("Back")
-                                .foregroundColor(.black)
                         }
+                        .foregroundColor(Theme.textColor)
+
                     }
                 }
 

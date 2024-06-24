@@ -27,10 +27,12 @@ struct FeedReplyView: View {
 
                         VStack(alignment: .leading, spacing: 5) {
                             Text(thread.user?.username ?? "")
+
                             Text(thread.caption)
                                 .multilineTextAlignment(.leading)
                                 .font(.footnote)
-                        }
+                        }                                .foregroundColor(Theme.textColor)
+
 
 
                         Spacer()
@@ -59,11 +61,14 @@ struct FeedReplyView: View {
                         ThreadsCircleImage(user: user)
                         VStack {
                             HStack {
-                                Text(user?.fullname ?? "Fuck a bug")
+                                Text(user?.fullname ?? "")
                                 Spacer()
                             }
-                            TextField("Reply to \(thread.user?.username ?? "")", text: $replyCaption, axis: .vertical).multilineTextAlignment(.leading)
+                            TextField("Reply to \(thread.user?.username ?? "")", text: $replyCaption, axis: .vertical)
+                                .multilineTextAlignment(.leading)
                         }
+                        .foregroundColor(Theme.textColor)
+
 
                     }.padding()
                     Spacer()
@@ -78,13 +83,13 @@ struct FeedReplyView: View {
                             Text("Post")
 
                                 .bold()
-                                .foregroundStyle(.black)
+                                .foregroundStyle(Theme.backgroundColor)
                                 .frame(width: 100, height: 30)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .stroke(Color.black, lineWidth: 1)
+                                        .stroke(Theme.backgroundColor, lineWidth: 1)
                                 )
-                                .background(.white)
+                                .background(Theme.textColor)
                                 .cornerRadius(30)
                         }
                     }.padding()
@@ -102,7 +107,7 @@ struct FeedReplyView: View {
                         dismiss()
                     } label: {
                         Text("Cancel")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Theme.textColor)
                     }
                 }
 
@@ -114,7 +119,7 @@ struct FeedReplyView: View {
                     } label: {
                         Text("Done")
                             .bold()
-                            .foregroundStyle(.black)
+                            .foregroundColor(Theme.textColor)
                     }
                 }
             }
