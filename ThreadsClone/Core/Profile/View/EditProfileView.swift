@@ -64,10 +64,10 @@ struct EditProfileView: View {
                     }
 
                     Divider()
-                    Toggle("Provate profile", isOn: $toogle)
+                    Toggle("Private profile", isOn: $toogle)
                 }
                 .padding()
-                .background(.white)
+                .background(Theme.backgroundColor)
                 .cornerRadius(10)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
@@ -82,7 +82,6 @@ struct EditProfileView: View {
                         dismiss()
                     } label: {
                         Text("Cancel")
-                            .foregroundStyle(.black)
                     }
                 }
 
@@ -95,10 +94,9 @@ struct EditProfileView: View {
                     } label: {
                         Text("Done")
                             .bold()
-                            .foregroundStyle(.black)
                     }
                 }
-            }
+            }.foregroundStyle(Theme.textColor)
         }
     }
 }

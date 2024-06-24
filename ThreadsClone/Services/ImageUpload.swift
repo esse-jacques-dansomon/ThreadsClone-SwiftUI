@@ -24,4 +24,26 @@ struct ImageUploader {
             return nil
         }
     }
+
+    static func uploadMedia(mediaData: Data, mediaType: String, completion: @escaping (Result<String, Error>) -> Void) {
+            let storage = Storage.storage()
+            let fileName = UUID().uuidString + (mediaType == "image" ? ".jpg" : ".mp4")
+            let storageRef = storage.reference().child("media/\(fileName)")
+
+            storageRef.putData(mediaData, metadata: nil) { metadata, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        return
+                    }
+                    if let url = url {
+                        completion(.success(url.absoluteString))
+                    }
+                }
+            }
+        }
 }

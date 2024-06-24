@@ -8,40 +8,42 @@
 import SwiftUI
 
 struct FeedView: View {
-    @StateObject var viewModel = FeedViewModel();
+    @EnvironmentObject var viewModel: FeedViewModel
+    @EnvironmentObject var currentUserProfileViewModel: CurrentUserProfileViewModel
 
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ScrollView {
+
                 LazyVStack {
-                    ForEach(viewModel.threads, id: \.self) { thread in
-                       ThreadItemView(thread: thread )
+                    Image("logo")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                    ForEach(viewModel.threads) { thread in
+
+                        ThreadItemView(thread: thread, isCurrentUser: thread.user == currentUserProfileViewModel.currentUser )
                     }
                 }.padding()
             }
+            .safeAreaPadding(.all)
+            .scrollIndicators(.hidden)
             .refreshable {
                 Task {
-                   try await viewModel.fetchThreads()
-                
+                    try await viewModel.fetchThreads()
                 }
             }
-            .toolbar {
-                ToolbarItem (placement: .navigationBarTrailing){
-                    Image(systemName: "arrow.counterclockwise")
-                }
-            }
-           
-            .navigationTitle("Threads")
-            .navigationBarTitleDisplayMode(.inline)
         }
+
     }
 }
 
 
 struct FeedView_preview: PreviewProvider {
     static var previews: some View {
+
         NavigationStack {
             FeedView()
+                .environmentObject(FeedViewModel())
         }
     }
 }

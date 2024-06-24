@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Firebase
 
+@MainActor
 class ExploreViewModel: ObservableObject {
 
     @Published var users = [User]()
@@ -17,8 +19,8 @@ class ExploreViewModel: ObservableObject {
         }
     }
 
-    @MainActor
-    private func fetchUsers() async throws {
+     func fetchUsers() async throws {
         self.users = try await UserService.fectUsers();
     }
+
 }

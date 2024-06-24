@@ -9,25 +9,25 @@ import SwiftUI
 
 struct ExplorerView: View {
     @State var search : String = ""
-    @StateObject var viewModel = ExploreViewModel()
+    @EnvironmentObject var viewModel : ExploreViewModel
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.users) { user in
-                        NavigationLink(value: user) {
-                            VStack {
-                                ThreadsUserItemIView(user: user)
-                                Divider()
+                        NavigationLink(
+                            destination:   ProfileView(user: user)) {
+                                VStack {
+                                    ThreadsUserItemIView( user: user)
+                                    Divider()
+                                }
                             }
-                        }
                     }
                 }
             }
-            .navigationDestination(for: User.self, destination: { user in
-                ProfileView(user: user)
-            })
+            .background(Theme.backgroundColor)
+            .foregroundColor(Theme.textColor)
             .navigationTitle("Search")
             .searchable(text: $search, prompt: "Search")
             
@@ -37,4 +37,5 @@ struct ExplorerView: View {
 
 #Preview {
     ExplorerView()
+        .environmentObject(ExploreViewModel())
 }

@@ -27,7 +27,7 @@ struct ProfileHeaderView: View {
 
                 }
                 Spacer()
-                ThreadsCircleImage(user: user)
+                ThreadsCircleImage(user: user, size: .large)
             }
             //User infos
             VStack(alignment: .leading, spacing: 4) {

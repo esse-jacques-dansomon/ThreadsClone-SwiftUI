@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrentUserProfile: View {
     @State var showEditView = false;
-    @StateObject var viewModel = CurrentUserProfileViewModel()
+    @EnvironmentObject var viewModel :  CurrentUserProfileViewModel
 
     private var currentUser: User? {
         return viewModel.currentUser
@@ -30,6 +30,7 @@ struct CurrentUserProfile: View {
                                 .scaledToFit()
                                 .frame(width: 25, height: 25)
 
+
                             NavigationLink {
                                 ProfileSettingsView()
                                     .navigationBarBackButtonHidden()
@@ -39,8 +40,10 @@ struct CurrentUserProfile: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 40, height: 40)
+
                             }
                         }
+
                     }.padding(.bottom)
 
                     // User and Menu
@@ -61,14 +64,20 @@ struct CurrentUserProfile: View {
                         })
 
 
-
-                        ThreadsTextBtnView(title: "Share Profile",
-                                           textColor: .black, background: .white)
+                        ShareLink(item: URL(string: "https://www.linkedin.com/in/esse-jacques-dansomon/")!) {
+                            ThreadsTextBtnView(title: "Share Profile",
+                                               textColor: .black, background: .white)
+                            }
                     }
 
                     // Custom TabView
                     if let user = currentUser {
-                        UserContentListView(user: user)
+                        UserContentListView(
+                            user: user,
+                            threads: viewModel.threads,
+                            replies: viewModel.replies,
+                            reposts: viewModel.reposts
+                          )
                     }
 
 

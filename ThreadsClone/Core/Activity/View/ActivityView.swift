@@ -9,51 +9,100 @@ import SwiftUI
 
 struct ActivityView: View {
     @State var isFixed = false
+    @State var selectedTabView = ActivityType.all
+
+    @EnvironmentObject var feedViewModel: FeedViewModel
+    @EnvironmentObject var exporeViewMel: ExploreViewModel
+    @EnvironmentObject var currentUserProfileViewModel: CurrentUserProfileViewModel
+
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading)  {
+        NavigationStack {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Activity")
+                        .font(.title)
+                        .bold()
+                    Spacer()
+                }.padding(.horizontal)
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top) {
+                        ForEach(ActivityType.allCases, id: \.self) { item in
+                            Button {
+                                selectedTabView = item
 
-                    ScrollView(.horizontal) {
-                        HStack {
-                            Text("Activity")
-                                .font(.title)
-                                .bold()
-                            Spacer()
-                        }
-                        HStack(alignment: .top) {
-                            ForEach(1...10, id: \.self){ item in
-                                Text("Text")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .background(.black)
-                                    .cornerRadius(20)
-
+                            } label: {
+                                Text(item.title)
+                                    .frame(width: 100, height: 40)
+                                    .foregroundStyle(selectedTabView.id == item.id ? Theme.backgroundColor : Theme.textColor)
+                                    .background(selectedTabView.id == item.id ? Theme.textColor : Color(.systemGray5))
+                                    .cornerRadius(9)
                             }
                         }
-                    }.padding()
+                    }
+                }
+                .scrollTargetBehavior(.paging)
+                .scrollIndicators(.hidden)
+                .padding(.horizontal, 10)
 
+                ScrollView {
+                    switch selectedTabView {
+                    case .all:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(feedViewModel.threads) { thread in
+                                ThreadItemView(thread: thread)
+                            }
+                        }.padding()
+                    case .createdThread:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(currentUserProfileViewModel.threads) { thread in
+                                ThreadItemView(thread: thread)
+                            }
+                        }.padding()
+                    case .likedThread:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(currentUserProfileViewModel.likes) { like in
+                              if  let thread = like.thread {
+                                  ThreadItemView(thread: thread)
+                                }
+                            }
+                        }.padding()
+                    case .repliedThread:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(currentUserProfileViewModel.replies) { reply in
+                                ReplyItemView(reply: reply)
+                            }
+                        }.padding()
+                    case .repostedThread:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(currentUserProfileViewModel.reposts) { repost in
+                                //ThreadItemView(thread: thread)
 
+                            }
+                        }.padding()
 
+                    case .followedUser:
+                        LazyVStack(alignment: .leading) {
+                            ForEach(currentUserProfileViewModel.followings) { follow in
 
-                ScrollView{
-                    //ThreadsUserItemIView()
-                    LazyVStack( alignment: .leading){
-                        ForEach(1...10, id: \.self){ item in
-                           // ThreadItemView()
-                        }
-                    }.padding()
+                                if  let user  = follow.followedUser {
+                                    ThreadsUserItemIView(user: user)
+                                }
+                            }
+                        }.padding()
+                    }
                 }
 
                 Spacer()
             }
-
-
         }
     }
 }
 
-
-
 #Preview {
-    ActivityView()
+    NavigationStack{
+        ActivityView()
+            .environmentObject(ExploreViewModel())
+            .environmentObject(FeedViewModel())
+    }
+
 }

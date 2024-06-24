@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
+
 
     @StateObject var viewModel  = ContentViewModel()
+
     var body: some View {
         ZStack {
             if (self.viewModel.showSplash) {
                 Group {
                     if( viewModel.userSession != nil) {
                         ThreadsTabBarView()
-                        
+                            .onAppear{
+                                Task {
+                                    try await  UserService.shared.fectCurrentUser()
+                                }
+                            }
+
                     }else {
                         SignInView()
                     }
@@ -24,8 +32,10 @@ struct ContentView: View {
             }else {
                 SplashScreenView()
             }
-        }  .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        } 
+        .background(Theme.backgroundColor)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 withAnimation {
                     self.viewModel.showSplash = true
                 }
@@ -34,8 +44,18 @@ struct ContentView: View {
 
 
     }
+
 }
 
 #Preview {
-    ContentView()
+        ContentView()
 }
+
+#Preview {
+
+        ContentView()
+        .preferredColorScheme(.dark)
+
+
+}
+

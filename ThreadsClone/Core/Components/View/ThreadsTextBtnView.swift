@@ -23,11 +23,12 @@ struct ThreadsTextBtnView: View {
             .padding(6)
 
 
-            .foregroundStyle(textColor)
-            .background(background)
+            .foregroundStyle(textColor == .white ? Theme.backgroundColor :  Theme.textColor)
+            .background(background == .black ? Theme.textColor : Theme.backgroundColor)
+            .cornerRadius(10)
             .overlay(
                    RoundedRectangle(cornerRadius: 10)
-                       .stroke(Color.black, lineWidth: 1)
+                    .stroke(.black, lineWidth: 1)
                )
 
     }
